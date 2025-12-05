@@ -1,26 +1,29 @@
-import { About } from "@/components/about";
-import { Contact } from "@/components/contact";
-import { Features } from "@/components/features";
-import { Footer } from "@/components/footer";
-import { Hero } from "@/components/hero";
-import { Navbar } from "@/components/navbar";
-import { Story } from "@/components/story";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-const App = () => {
+import { Home } from "@/pages/Home";
+import { Admin } from "@/pages/Admin";
+import { NotFound } from "@/pages/NotFound";
+import { AdminLogin } from "@/pages/AdminLogin";
+
+function App() {
   return (
-    <div className="relative min-h-screen w-screen overflow-x-hidden">
-      <Navbar />
+    <Router>
+      <Routes>
+        {/* Default Route → Home */}
+        <Route path="/" element={<Home />} />
 
-      <main>
-        <Hero />
-        <About />
-        <Features />
-        <Story />
-        <Contact />
-      </main>
+        {/* SHOW LOGIN ON /admin */}
+        <Route path="/admin" element={<AdminLogin />} />
 
-      <Footer />
-    </div>
+        {/* Actual dashboard */}
+        <Route path="/admin/dashboard" element={<Admin />} />
+
+        {/* 404 Fallback */}
+        <Route path="*" element={<NotFound />} />
+
+      </Routes>
+    </Router>
   );
-};
+}
+
 export default App;
